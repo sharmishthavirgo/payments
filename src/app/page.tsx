@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from 'react'; 
 type Payment = {
   id: string;
   amount: number;
