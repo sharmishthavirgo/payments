@@ -48,15 +48,24 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 - Installation
-    Clone the repository:
-    - git clone [your-repository-url]
-    - cd payments
-    Install the dependencies:
-    - yarn 
-    Run the app
-    - yarn dev
-    To run all tests in the project:
-    - yarn test (change env to jsdom for page and node for api routes)
+    - Clone the repository:
+        ```bash
+            git clone [your-repository-url]
+            cd payments
+        ```
+    - Install the dependencies:
+        ```bash
+            yarn
+        ```
+    -  Run the app
+         ```bash
+            yarn dev
+        ```
+    -  To run all tests in the project:
+        ```bash
+            yarn test (change env to jsdom for page and node for api routes)
+        ```
+    
 
 - Project Structure
     - src/app/api/payments/route.ts: The API route handler for payments.
