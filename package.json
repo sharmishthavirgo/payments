@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@swc/core": "^1.13.3",
+    "aws-cdk-lib": "^2.212.0",
+    "constructs": "^10.4.2",
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
