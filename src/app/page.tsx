@@ -12,6 +12,7 @@ export default function PaymentsPage() {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [recipient, setRecipient] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -30,6 +31,21 @@ export default function PaymentsPage() {
 
     fetchPayments();
   }, [recipient, scheduledDate]);
+
+  // Bonus 1: Calculate total amount
+  useEffect(() => {
+    const total = payments.reduce((sum, payment) => sum + payment.amount, 0);
+    setTotalAmount(total);
+  }, [payments]);
+
+  // Bonus 2: Highlight payments within the next 24 hours
+  const isWithin24Hours = (dateStr: string) => {
+    const now = new Date();
+    const scheduled = new Date(dateStr);
+    const diffInHours = (scheduled.getTime() - now.getTime()) / (1000 * 60 * 60);
+    return diffInHours > 0 && diffInHours <= 24;
+  };
+
 
   return (
     <div style={{ padding: "20px" }}>
@@ -56,10 +72,10 @@ export default function PaymentsPage() {
         </label>
       </div>
 
-      {/* <div style={{ marginBottom: '20px', fontWeight: 'bold' }}>
+      <div style={{ marginBottom: '20px', fontWeight: 'bold' }}>
         Total Amount: {totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
       </div>
-       */}
+      
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr style={{ backgroundColor: "#f2f2f2" }}>
@@ -75,9 +91,9 @@ export default function PaymentsPage() {
               key={payment.id}
               style={{
                 borderBottom: "1px solid #ddd",
-                // backgroundColor: isWithin24Hours(payment.scheduled_date)
-                //   ? "#fff8e1"
-                //   : "transparent",
+                backgroundColor: isWithin24Hours(payment.scheduled_date)
+                  ? "#fff8e1"
+                  : "transparent",
               }}
             >
               <td style={tableCellStyle}>{payment.id}</td>
